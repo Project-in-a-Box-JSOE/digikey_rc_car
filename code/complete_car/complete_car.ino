@@ -5,27 +5,38 @@
 #include <Servo.h>
 
 #define BAUDRATE 9600
-#define servo_pin 10
+#define CE 9
+#define CSN 8
+
+// Motor pinout
 #define enA 6
 #define in1 7
 #define in2 5
 
-//create an RF24 object
-RF24 radio(9, 8);  // CE, CSN
+// Servo pinout
+#define servo_pin 10
+
+// Create an RF24 object
+RF24 radio(CE, CSN);
+
+// Create servo object
 Servo servo;
 
-//address through which two modules communicate.
+// Unique address through which two modules communicate.
 const byte address[6] = "00001";
+
 int raw_analog_reading_x, raw_analog_reading_y;
 
 void setup() {
-  
+
   Serial.begin(BAUDRATE);
-  
+
   radio.begin();
   
+  //set the address
   radio.openReadingPipe(0, address);
   
+  //Set module as receiver
   radio.startListening();
 
   // Set all the motor control pins to outputs
@@ -42,38 +53,45 @@ void setup() {
   
 }
 
-void receive_joystick_inputs() {
+// Receives the x and y inputs from the remote
+void receive_thumbstick_inputs() {
 
   const int inputs[2];
 
+  // Read the data if available in buffer
   if(radio.available()) {
     radio.read(&inputs, sizeof(inputs));
   }
 
+  // Refresh current joystick input readings
   raw_analog_reading_x = inputs[0];
   raw_analog_reading_y = inputs[1];
   
 }
 
+// Maps current reading of x thumbstick to servo arm
 void map_servo() {
 
+  // Tweak joystick min and max mapped values as necessary
   int servo_pos = map(raw_analog_reading_x, 0, 675, 0, 180);
   
   servo.write(servo_pos);
   
 }
 
+// Maps current reading of y thumbstick to motor
 void map_motomoto() {
 
-  int motor_speed = 100;
+  int motor_speed = 255;  // Feel free to tweak. For PWM maximum possible values are 0 to 255
 
-  if(raw_analog_reading_y > 355){
-    // Forward
+  if(raw_analog_reading_y > 352){
+    // Forward. Tweak threshold to +5 of middle/rest state analog reading
+    digitalWrite(in1, HIGH);
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
   }
-  else if(raw_analog_reading_y < 347){
-    // Backward
+  else if(raw_analog_reading_y < 342){
+    // Backward. Tweak threshold to -5 of middle/rest state analog reading
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
   }
@@ -89,7 +107,7 @@ void map_motomoto() {
 
 void loop() {
 
-  receive_joystick_inputs();
+  receive_thumbstick_inputs();
   
   map_servo();
 
