@@ -73,7 +73,7 @@ void receive_thumbstick_inputs() {
 void map_servo() {
 
   // Tweak joystick min and max mapped values as necessary
-  int servo_pos = map(raw_analog_reading_x, 0, 675, 0, 180);
+  int servo_pos = map(raw_analog_reading_x, 0, 686, 0, 180);
   
   servo.write(servo_pos);
   
@@ -84,13 +84,13 @@ void map_motomoto() {
 
   int motor_speed = 255;  // Feel free to tweak. For PWM maximum possible values are 0 to 255
 
-  if(raw_analog_reading_y > 352){
+  if(raw_analog_reading_y > 357){
     // Forward. Tweak threshold to +5 of middle/rest state analog reading
     digitalWrite(in1, HIGH);
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
   }
-  else if(raw_analog_reading_y < 342){
+  else if(raw_analog_reading_y < 347){
     // Backward. Tweak threshold to -5 of middle/rest state analog reading
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);
@@ -112,11 +112,12 @@ void loop() {
   map_servo();
 
   map_motomoto();
-
+/*
   Serial.print("(X,Y)=(");
   Serial.print(raw_analog_reading_x);
   Serial.print(",");
   Serial.print(raw_analog_reading_y);
   Serial.println(")");
+  */
    
 }
