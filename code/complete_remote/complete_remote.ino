@@ -22,7 +22,7 @@ int raw_analog_reading_x, raw_analog_reading_y;
 
 void setup() {
   
-  //Serial.begin(BAUDRATE);
+  Serial.begin(BAUDRATE);
   
   radio.begin();
   
@@ -47,21 +47,21 @@ void send_joystick_inputs() {
 
 void loop() {
 
-  //Serial.print("(X,Y)=");
+  Serial.print("(X,Y)=");
 
-  //Serial.print("(");
+  Serial.print("(");
 
   // Read + print thumbstick X
   raw_analog_reading_x = analogRead(thumbstick_x);
-  //Serial.print(raw_analog_reading_x);
+  Serial.print(raw_analog_reading_x);
 
-  //Serial.print(",");
+  Serial.print(",");
 
   // Read + print thumbstick Y
   raw_analog_reading_y = analogRead(thumbstick_y);
-  //Serial.print(raw_analog_reading_y);
+  Serial.print(raw_analog_reading_y);
 
-  //Serial.println(")");
+  Serial.println(")");
 
   send_joystick_inputs();
  

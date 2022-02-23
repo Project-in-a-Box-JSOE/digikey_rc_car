@@ -23,7 +23,7 @@ RF24 radio(CE, CSN);
 Servo servo;
 
 // Unique address through which two modules communicate.
-const byte address[6] = "00001";
+const byte address[6] = "00002";
 
 int raw_analog_reading_x, raw_analog_reading_y;
 
