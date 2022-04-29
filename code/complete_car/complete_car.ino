@@ -56,7 +56,7 @@ void setup() {
 // Receives the x and y inputs from the remote
 void receive_thumbstick_inputs() {
 
-  const int inputs[2];
+  int inputs[2];
 
   // Read the data if available in buffer
   if(radio.available()) {
@@ -112,12 +112,11 @@ void loop() {
   map_servo();
 
   map_motomoto();
-/*
+
   Serial.print("(X,Y)=(");
   Serial.print(raw_analog_reading_x);
   Serial.print(",");
   Serial.print(raw_analog_reading_y);
   Serial.println(")");
-  */
-   
+ 
 }
