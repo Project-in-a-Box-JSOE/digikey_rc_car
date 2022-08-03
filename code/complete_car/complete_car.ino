@@ -9,12 +9,12 @@
 #define CSN 8
 
 // Motor pinout
-#define enA 6
-#define in1 7
-#define in2 5
+#define enA 5
+#define in1 6
+#define in2 10
 
 // Servo pinout
-#define servo_pin 10
+#define servo_pin A0
 
 // Create an RF24 object
 RF24 radio(CE, CSN);
@@ -23,7 +23,7 @@ RF24 radio(CE, CSN);
 Servo servo;
 
 // Unique address through which two modules communicate.
-const byte address[6] = "00002";
+const byte address[6] = "00001";
 
 int raw_analog_reading_x, raw_analog_reading_y;
 
@@ -82,15 +82,15 @@ void map_servo() {
 // Maps current reading of y thumbstick to motor
 void map_motomoto() {
 
-  int motor_speed = 255;  // Feel free to tweak. For PWM maximum possible values are 0 to 255
+  int motor_speed = 100;  // Feel free to tweak. For PWM maximum possible values are 0 to 255
 
-  if(raw_analog_reading_y > 357){
+  if(raw_analog_reading_y > 500){
     // Forward. Tweak threshold to +5 of middle/rest state analog reading
     digitalWrite(in1, HIGH);
     digitalWrite(in1, HIGH);
     digitalWrite(in2, LOW);
   }
-  else if(raw_analog_reading_y < 347){
+  else if(raw_analog_reading_y < 50){
     // Backward. Tweak threshold to -5 of middle/rest state analog reading
     digitalWrite(in1, LOW);
     digitalWrite(in2, HIGH);

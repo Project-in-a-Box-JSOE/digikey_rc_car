@@ -16,33 +16,33 @@
 RF24 radio(CE, CSN);
 
 // Unique address through which two modules communicate.
-const byte address[6] = "00002";
+const byte address[6] = "00001";
 
 int raw_analog_reading_x, raw_analog_reading_y;
 
 void setup() {
-  
+
   Serial.begin(BAUDRATE);
-  
+
   radio.begin();
-  
+
   //set the address
   radio.openWritingPipe(address);
-  
+
   //Set module as transmitter
   radio.stopListening();
-  
+
 }
 
 // Sends the x and y inputs to the car
 void send_joystick_inputs() {
 
   const int inputs[2] = {raw_analog_reading_x, raw_analog_reading_y};
-  
+
   radio.write(&inputs, sizeof(inputs));
 
   delay(10);
-  
+
 }
 
 void loop() {
@@ -64,5 +64,5 @@ void loop() {
   Serial.println(")");
 
   send_joystick_inputs();
- 
+
 }
