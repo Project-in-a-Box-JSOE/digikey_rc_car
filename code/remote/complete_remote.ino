@@ -2,7 +2,6 @@
 #include <SPI.h>
 #include <nRF24L01.h>
 #include <RF24.h>
-#include <Servo.h>
 
 #define BAUDRATE 9600
 #define CE 9
