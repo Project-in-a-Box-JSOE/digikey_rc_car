@@ -1,6 +1,6 @@
 # SYWMI_RC_Car
 
-**A project series hosted by Project in a Box at UCSD**
+**A Digikey collaborated project**
 > Project documentation [@Maker.io](https://www.digikey.com/en/maker/profiles/b3c9555ffd7248bcb833dc392372bf2a)<br />
 > More about [Project in a Box](https://pibucsd.org/)
 
