@@ -9,8 +9,8 @@ Create your own remote controlled (RC) car from scratch with Project in a Box (P
 
 ## BOM
 For simplicity, we will split the project's BOM into three:
-- Remote BOM
+- Remote
 - Car (Electronics)
 - Car (Hardware)
 
-Find them [here](https://docs.google.com/spreadsheets/d/1kUkEL7zyoNOz5KWBoTNwHi_Ymp5fQe9DswVCeSJB654/edit#gid=0)
+Find them [here](BOM.pdf)
